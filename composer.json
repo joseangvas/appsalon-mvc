@@ -1,0 +1,19 @@
+{
+    "name": "joseangvas/appsalon",
+    "description": "Proyecto PHP 8 de Peluqueria",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "MVC\\": "./",
+            "Controllers\\": "./controllers",
+            "Model\\": "./models"
+        }
+    },
+    "authors": [
+        {
+            "name": "joseangvas",
+            "email": "developer.javp@gmail.com"
+        }
+    ],
+    "require": {}
+}

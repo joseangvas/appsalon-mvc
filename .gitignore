@@ -1,0 +1,12 @@
+# CARPETAS
+
+# Configuraciones:
+/.vscode
+
+# Dependencias:
+/node_modules
+/vendor
+
+
+# ARCHIVOS
+
