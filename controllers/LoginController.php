@@ -10,9 +10,7 @@ class LoginController {
   
   //*****  INICIO DE SESION DE USUARIO  ******//
   public static function login(Router $router) {
-    
     $router->render('auth/login');
-
   }
 
 
@@ -24,12 +22,10 @@ class LoginController {
 
   //*****  CUANDO EL USUARIO OLVIDO SU PASSWORD  ******//
   public static function olvide(Router $router) {
-    
+
     $router->render('auth/olvide-password', [
 
-
     ]);
-
   }
 
   //*****  RECUPERAR PASSWORD DE USUARIO  *****//
@@ -75,26 +71,58 @@ class LoginController {
           if($resultado) {
             header('Location: /mensaje');
           }
-
-
-
-
         }
       }
-
     }
     
     $router->render('auth/crear-cuenta', [
       'usuario' => $usuario,
       'alertas' => $alertas
-
     ]);
   }
 
+
+  //* Llamar a la Vista de Mensajes
   public static function mensaje(Router $router) {
-
     $router->render('auth/mensaje');
-
   }
 
+
+  //* Confirmar el Registro de Usuario
+  public static function confirmar(Router $router) {
+    // Alertas Vacías
+    $alertas = [];
+
+    // Sanitizar el Token
+    $token = s($_GET['token']);
+
+    // Obtener los Datos del Usuario por su Token
+    $usuario = Usuario::where('token', $token);
+    
+    // Validar el Usuario por el Token
+    if(empty($usuario)) {
+      // Mostrar Mensaje de Error
+      Usuario::setAlerta('error', 'Token No Válido');
+    } else {
+      // Modificar Usuario Confirmado
+      $usuario->confirmado = '1';
+
+      // Blanquear el Token para Evitar Reutilización
+      $usuario->token = null;
+
+      // Guardar los Datos del Registro
+      $usuario->guardar();
+
+      // Mensaje de aviso de Registro Exitoso
+      Usuario::setAlerta('exito', 'Cuenta comprobada Correctamente');
+    }
+
+    // Obtener Alertas
+    $alertas = Usuario::getAlertas();
+
+    // Renderizar la Vista
+    $router->render('auth/confirmar-cuenta', [
+      'alertas' => $alertas
+    ]);
+  }
 }
