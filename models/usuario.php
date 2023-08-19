@@ -17,6 +17,8 @@ class Usuario extends ActiveRecord {
   public $confirmado;
   public $token;
 
+
+  //*****  FUNCION CONSTRUCTORA DE LA CLASE  *****//
   public function __construct($args = []) {
     $this->id = $args['id'] ?? null;
     $this->nombre = $args['nombre'] ?? '';
@@ -24,14 +26,13 @@ class Usuario extends ActiveRecord {
     $this->email = $args['email'] ?? '';
     $this->password = $args['password'] ?? '';
     $this->telefono = $args['telefono'] ?? '';
-    $this->admin = $args['admin'] ?? null;
-    $this->confirmado = $args['confirmado'] ?? null;
+    $this->admin = $args['admin'] ?? '0';
+    $this->confirmado = $args['confirmado'] ?? '0';
     $this->token = $args['token'] ?? '';
-
-
   }
 
-  //* Mensajes de Validación para la Creación de una cuenta
+
+  //*****  MENSAJE DE VALIDACION PARA LA CREACION DE UNA CUENTA  *****//
   public function validarNuevaCuenta() {
     if(!$this->nombre) {
       self::$alertas['error'][] = 'El Nombre es Obligatorio';
@@ -58,7 +59,8 @@ class Usuario extends ActiveRecord {
     return self::$alertas;
   }
 
-  //* Revisa si el Usuario ya Existe
+
+  //*****  REVISAR SI EL USUARIO YA EXISTE  *****//
   public function existeUsuario() {
     $query = "SELECT * FROM " . self::$tabla . " WHERE email = '" . $this->email . "' LIMIT 1" ;
 
@@ -71,10 +73,14 @@ class Usuario extends ActiveRecord {
     return $resultado;
   }
 
+
+  //*****  HASHEAR EL PASSWORD NUEVO  *****//
   public function hashPassword() {
     $this->password = password_hash($this->password, PASSWORD_BCRYPT);
   }
 
+  
+  //*****  CREAR UN TOKEN  *****//
   public function crearToken() {
     $this->token = uniqid();
   }
