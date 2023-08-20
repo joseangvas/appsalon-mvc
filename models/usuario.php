@@ -60,6 +60,20 @@ class Usuario extends ActiveRecord {
   }
 
 
+  //*****  VALIDAR LOGIN DE USUARIO AL INICIAR SESION  *****/
+  public function validarLogin() {
+    if(!$this->email) {
+      self::$alertas['error'][] = 'El Email es Obligatorio';
+    }
+
+    if(!$this->password) {
+      self::$alertas['error'][] = 'El Password es Obligatorio';
+    }
+
+    return self::$alertas;
+  }
+  
+
   //*****  REVISAR SI EL USUARIO YA EXISTE  *****//
   public function existeUsuario() {
     $query = "SELECT * FROM " . self::$tabla . " WHERE email = '" . $this->email . "' LIMIT 1" ;
@@ -83,6 +97,16 @@ class Usuario extends ActiveRecord {
   //*****  CREAR UN TOKEN  *****//
   public function crearToken() {
     $this->token = uniqid();
+  }
+
+  public function comprobarPasswordAndVerificado($password) {
+    $resultado = password_verify($password, $this->password);
+
+    if(!$resultado || !$this->confirmado) {
+      self::$alertas['error'][] = 'Password Incorrecto o tu Cuenta No ha sido Confirmada';
+    } else {
+      return true;
+    }
   }
 
 }
