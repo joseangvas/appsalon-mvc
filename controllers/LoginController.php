@@ -40,7 +40,7 @@ class LoginController {
             }
           }
         } else {
-          Usuario::setAlerta('error', 'Usuario No Encontrado');
+          $alertas = Usuario::setAlerta('error', 'Usuario No Encontrado');
         }
       }
     }
