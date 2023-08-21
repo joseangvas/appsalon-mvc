@@ -102,6 +102,7 @@ class LoginController {
   //*****  RECUPERAR PASSWORD DE USUARIO  *****//
   public static function recuperar(Router $router) {
     $alertas = [];
+    $error = false;
     $token = s($_GET['token']);
 
     // Buscar Usuario por su Token
@@ -119,16 +120,18 @@ class LoginController {
 
       if(empty($alertas)) {
         $usuario->password = null;
-        $usuario->password = $password->$password;
+        $usuario->password = $password->password;
         $usuario->hashPassword();
         $usuario->token = null;
+
+        // Grabar Datos en la BD
         $resultado = $usuario->guardar();
 
+        // Redireccionar al Login si Ingresó Password Válido
         if($resultado) {
           header('Location: /');
         }
       }
-
     }
 
     $alertas = Usuario::getAlertas();

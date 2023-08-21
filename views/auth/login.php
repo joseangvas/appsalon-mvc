@@ -5,7 +5,7 @@
   include_once __DIR__ . "/../templates/alertas.php";
 ?>
 
-<form action="/" class="formulario" method="POST">
+<form action="/cita" class="formulario" method="POST">
   <div class="campo">
     <label for="email">Email</label>
     <input
