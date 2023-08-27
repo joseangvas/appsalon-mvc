@@ -22,6 +22,12 @@ function iniciarApp() {
   paginaSiguiente();
 
   consultarAPI();  // Consulta la API en el Backend de PHP
+
+  nombreCliente();  // Añade el Nombre del Cliente al Objeto de cita
+  seleccionarFecha();  // Añade la Fecha de la Cita en el Objeto
+  seleccionarHora();  // Añade la Hora de la Cita en el Objeto
+
+  mostrarResumen();  // Muestra el Resumen de la Cita
 };
 
 
@@ -72,6 +78,8 @@ function botonesPaginador() {
   } else if (paso === 3) {
     paginaAnterior.classList.remove('ocultar');
     paginaSiguiente.classList.add('ocultar');
+
+    mostrarResumen();
   } else {
     paginaAnterior.classList.remove('ocultar');
     paginaSiguiente.classList.remove('ocultar');
@@ -128,6 +136,7 @@ function mostrarServicios(servicios) {
     servicioDiv.dataset.idServicio = id;
     servicioDiv.appendChild(nombreServicio);
     servicioDiv.appendChild(precioServicio);
+
     servicioDiv.onclick = function() {
       seleccionarServicio(servicio);
     }
@@ -152,5 +161,78 @@ function seleccionarServicio(servicio) {
     // Agregar Servicio Nuevo
     cita.servicios = [...servicios, servicio];
     divServicio.classList.add('seleccionado');
+  }
+}
+
+
+function nombreCliente() {
+  cita.nombre = document.querySelector('#nombre').value;
+}
+
+
+function seleccionarFecha() {
+  const inputFecha = document.querySelector('#fecha');
+  inputFecha.addEventListener('input', function(e) {
+    const dia = new Date(e.target.value).getUTCDay();
+    
+    // Evaluar si Fecha es Fin de Semana para mostrar Error
+    if([6,0].includes(dia)) {
+      e.target.value = '';
+      mostrarAlerta('Fines de Semana No Permitidos', 'error', '.formulario');
+    } else {
+      cita.fecha = e.target.value;
+    }
+  });
+}
+
+
+function seleccionarHora() {
+  const inputHora = document.querySelector('#hora');
+  inputHora.addEventListener('input', function(e) {
+    const horaCita = e.target.value;
+    const hora = horaCita.split(":")[0];
+
+    if(hora < 9 || hora > 18) {
+      e.target.value = '';
+      mostrarAlerta('Hora No Válida', 'error', '.formulario');
+    } else {
+      cita.hora = e.target.value;
+    }
+  });
+}
+
+
+function mostrarAlerta(mensaje, tipo, elemento, desaparece = true) {
+  // Previene que se Genere más de una alerta
+  const alertaPrevia = document.querySelector('.alerta');
+
+  if(alertaPrevia) {
+    alertaPrevia.remove();
+  };
+
+  // Scripting para Crear la Alerta
+  const alerta = document.createElement('DIV');
+  alerta.textContent = mensaje;
+  alerta.classList.add('alerta');
+  alerta.classList.add(tipo);
+
+  const referencia = document.querySelector(elemento);
+  referencia.appendChild(alerta);
+
+  if(desaparece) {
+    // Calcular Tiempo de 4 Segs. de Muestra de la Alerta
+    setTimeout(() => {
+      alerta.remove();
+    }, 4000);
+  }
+}
+
+function mostrarResumen() {
+  const resumen = document.querySelector('.contenido-resumen');
+
+  if(Object.values(cita).includes('') || cita.servicios.length === 0) {  // Iterar en cita para ver si existe string vacío
+    mostrarAlerta('Faltan Datos de Servicios, Fecha u hora', 'error', '.contenido-resumen', false);
+  } else {
+    console.log('Todo Bien...');
   }
 }
