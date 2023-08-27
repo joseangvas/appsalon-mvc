@@ -2,6 +2,13 @@ let paso = 1;
 let pasoInicial = 1;
 let pasoFinal = 3;
 
+const cita = {
+  nombre: '',
+  fecha: '',
+  hora: '',
+  servicios: []
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   iniciarApp();
 });
@@ -121,7 +128,29 @@ function mostrarServicios(servicios) {
     servicioDiv.dataset.idServicio = id;
     servicioDiv.appendChild(nombreServicio);
     servicioDiv.appendChild(precioServicio);
+    servicioDiv.onclick = function() {
+      seleccionarServicio(servicio);
+    }
 
     document.querySelector('#servicios').appendChild(servicioDiv);
   })
+}
+
+function seleccionarServicio(servicio) {
+  const {id} = servicio;
+  const {servicios} = cita;
+
+  // Identificar el elemento al que se le da Click
+  const divServicio = document.querySelector(`[data-id-servicio="${id}"]`);
+
+  // Comprobar si un Servicio fué Agregado o Quitarlo
+  if(servicios.some(agregado => agregado.id === id)) {
+    // Eliminar el Servicio agregado
+    cita.servicios = servicios.filter(agregado => agregado.id !== id);
+    divServicio.classList.remove('seleccionado');
+  } else {
+    // Agregar Servicio Nuevo
+    cita.servicios = [...servicios, servicio];
+    divServicio.classList.add('seleccionado');
+  }
 }
