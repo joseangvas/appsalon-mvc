@@ -9,6 +9,7 @@ const cita = {
   servicios: []
 }
 
+
 document.addEventListener('DOMContentLoaded', function() {
   iniciarApp();
 });
@@ -88,6 +89,7 @@ function botonesPaginador() {
   mostrarSeccion();
 }
 
+
 function paginaAnterior() {
   const paginaAnterior = document.querySelector('#anterior');
   paginaAnterior.addEventListener('click', function(e) {
@@ -97,6 +99,7 @@ function paginaAnterior() {
   });
 };
 
+
 function paginaSiguiente() {
   const paginaSiguiente = document.querySelector('#siguiente');
   paginaSiguiente.addEventListener('click', function(e) {
@@ -105,6 +108,7 @@ function paginaSiguiente() {
       botonesPaginador();
   });
 };
+
 
 async function consultarAPI() {
   try {
@@ -118,6 +122,7 @@ async function consultarAPI() {
     console.log(error);
   }
 }
+
 
 function mostrarServicios(servicios) {
   servicios.forEach(servicio => {
@@ -134,6 +139,7 @@ function mostrarServicios(servicios) {
     const servicioDiv = document.createElement('DIV');
     servicioDiv.classList.add('servicio');
     servicioDiv.dataset.idServicio = id;
+
     servicioDiv.appendChild(nombreServicio);
     servicioDiv.appendChild(precioServicio);
 
@@ -144,6 +150,7 @@ function mostrarServicios(servicios) {
     document.querySelector('#servicios').appendChild(servicioDiv);
   })
 }
+
 
 function seleccionarServicio(servicio) {
   const {id} = servicio;
@@ -230,9 +237,59 @@ function mostrarAlerta(mensaje, tipo, elemento, desaparece = true) {
 function mostrarResumen() {
   const resumen = document.querySelector('.contenido-resumen');
 
+  // Limpiar el Contenido del Resumen
+  while(resumen.firstChild) {
+    resumen.removeChild(resumen.firstChild);
+  }
+
   if(Object.values(cita).includes('') || cita.servicios.length === 0) {  // Iterar en cita para ver si existe string vacío
     mostrarAlerta('Faltan Datos de Servicios, Fecha u hora', 'error', '.contenido-resumen', false);
-  } else {
-    console.log('Todo Bien...');
+  
+    return;
   }
-}
+
+  // Formatear el DIV de Resumen
+  const {nombre, fecha, hora, servicios} = cita;
+
+  // Heading para Resumen de Servicios
+  const headingServicios = document.createElement('H3');
+  headingServicios.textContent = 'Resumen de Servicios';
+  resumen.appendChild(headingServicios);
+
+  // Iterar y Mostrar los Servicios
+  servicios.forEach(servicio => {
+    const {id, precio, nombre} = servicio;
+    const contenedorServicio = document.createElement('DIV');
+    contenedorServicio.classList.add('contenedor-servicio');
+
+    const textoServicio = document.createElement('P');
+    textoServicio.textContent = nombre;
+
+    const precioServicio = document.createElement('P');
+    precioServicio.innerHTML = `<span>Precio:</span> $${precio}`;
+
+    contenedorServicio.appendChild(textoServicio);
+    contenedorServicio.appendChild(precioServicio);
+
+    resumen.appendChild(contenedorServicio);
+
+  });
+
+  // Heading para Resumen de Cita
+  const headingCita = document.createElement('H3');
+  headingCita.textContent = 'Datos del Cliente';
+  resumen.appendChild(headingCita);
+
+  const nombreCliente = document.createElement('P');
+  nombreCliente.innerHTML = `<span>Nombre:</span> ${nombre}`
+
+  const fechaCita = document.createElement('P');
+  fechaCita.innerHTML = `<span>Fecha:</span> ${fecha}`
+
+  const horaCita = document.createElement('P');
+  horaCita.innerHTML = `<span>Hora:</span> ${hora}`;
+
+  resumen.appendChild(nombreCliente);
+  resumen.appendChild(fechaCita);
+  resumen.appendChild(horaCita);
+};

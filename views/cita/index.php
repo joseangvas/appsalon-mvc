@@ -13,6 +13,8 @@
     <p class="text-center" >Elige tus Servicios a Continuación</p>
     <div id="servicios" class="listado-servicios">
 
+    <!-- AQUI SE INCLUYEN LOS SERVICIOS DEL CLIENTE DESDE APP.JS -->
+
     </div>
   </div>
 
@@ -51,7 +53,7 @@
     </form>
   </div>
 
-  <div id="paso-3" class="seccion">
+  <div id="paso-3" class="seccion contenido-resumen">
     <h2>Resumen</h2>
     <p>Verifica que la Información sea Correcta</p>
   </div>
