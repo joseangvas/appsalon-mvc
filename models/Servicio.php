@@ -15,7 +15,5 @@ class Servicio extends ActiveRecord {
     $this->id = $args['id'] ?? null;
     $this->nombre = $args['nombre'] ?? '';
     $this->precio = $args['precio'] ?? '';
-
-    
   }
 }

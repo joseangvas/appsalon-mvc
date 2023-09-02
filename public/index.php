@@ -30,9 +30,9 @@ $router->get('/mensaje', [LoginController::class, 'mensaje']);
 //* Area Privada
 $router->get('/cita', [CitaController::class, 'index']);
 
-//* API de Citas
+//* API de Citas y Servicios
 $router->get('/api/servicios', [APIController::class, 'index']);
-
+$router->post('/api/citas', [APIController::class, 'guardar']);
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();
