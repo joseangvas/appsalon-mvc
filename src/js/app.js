@@ -119,7 +119,7 @@ async function consultarAPI() {
     mostrarServicios(servicios);
 
    } catch (error) {
-    console.log(error);
+    alert(error);
   }
 }
 
@@ -316,10 +316,27 @@ function mostrarResumen() {
 };
 
 
-function reservarCita() {
+async function reservarCita() {
+  const {nombre, fecha, hora, servicios} = cita;
+
+  const idServicios = servicios.map(servicio => servicio.id);
+
   const datos = new FormData();
-  datos.append('nombre', 'José')
-  // console.log([...datos]); 
+  datos.append('nombre', nombre);
+  datos.append('fecha', fecha);
+  datos.append('hora', hora);
+  datos.append('servicios', idServicios);
+
+  // Petición hacia la API
+  const url = 'http://localhost:3000/api/citas';
+  const respuesta = await fetch(url, {
+    method: 'POST',
+    body: datos
+  });
+
+  const resultado = await respuesta.json();
+
+  // console.log(resultado);
 
   
 }
