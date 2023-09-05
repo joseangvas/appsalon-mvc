@@ -50,6 +50,9 @@
           id="hora"
         />
       </div>
+
+      <input type="hidden" id="id" value="<?php echo $id; ?>">
+
     </form>
   </div>
 
@@ -66,6 +69,7 @@
 
 <?php
   $script = "
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
     <script src='build/js/app.js'></script>
   ";
 ?>

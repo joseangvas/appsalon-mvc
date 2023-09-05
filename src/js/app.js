@@ -3,6 +3,7 @@ let pasoInicial = 1;
 let pasoFinal = 3;
 
 const cita = {
+  id: '',
   nombre: '',
   fecha: '',
   hora: '',
@@ -24,6 +25,7 @@ function iniciarApp() {
 
   consultarAPI();  // Consulta la API en el Backend de PHP
 
+  idCliente();  // Añade el ID del Cliente
   nombreCliente();  // Añade el Nombre del Cliente al Objeto de cita
   seleccionarFecha();  // Añade la Fecha de la Cita en el Objeto
   seleccionarHora();  // Añade la Hora de la Cita en el Objeto
@@ -172,6 +174,11 @@ function seleccionarServicio(servicio) {
 }
 
 
+function idCliente() {
+  cita.id = document.querySelector('#id').value;
+}
+
+
 function nombreCliente() {
   cita.nombre = document.querySelector('#nombre').value;
 }
@@ -317,26 +324,45 @@ function mostrarResumen() {
 
 
 async function reservarCita() {
-  const {nombre, fecha, hora, servicios} = cita;
+  const {nombre, fecha, hora, servicios, id} = cita;
 
   const idServicios = servicios.map(servicio => servicio.id);
 
   const datos = new FormData();
-  datos.append('nombre', nombre);
   datos.append('fecha', fecha);
   datos.append('hora', hora);
   datos.append('servicios', idServicios);
+  datos.append('usuarioId', id);
 
-  // Petición hacia la API
-  const url = 'http://localhost:3000/api/citas';
-  const respuesta = await fetch(url, {
-    method: 'POST',
-    body: datos
-  });
+  try {
+    // Petición hacia la API
+    const url = 'http://localhost:3000/api/citas';
+    const respuesta = await fetch(url, {
+      method: 'POST',
+      body: datos
+    });
 
-  const resultado = await respuesta.json();
+    const resultado = await respuesta.json();
 
-  // console.log(resultado);
+    // console.log(resultado.resultado);
 
-  
+    if(resultado.resultado) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Cita Creada',
+        text: 'STu Cita fué Creada Correctamente',
+        button: 'OK'
+      }).then(() => {
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      })
+    }
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Hubo un Error al Guardar la Cita'
+    })
+  }
 }
