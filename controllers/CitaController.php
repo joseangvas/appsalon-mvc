@@ -9,10 +9,13 @@ class CitaController {
 
     session_start();
 
+    // Comprobar si el Usuario está Autenticado
+    isAuth();
+
+    // Renderizar Datos del Usuario Autenticado
     $router->render('cita/index', [
       'nombre' => $_SESSION['nombre'],
       'id' => $_SESSION['id']
-
     ]);
   }
 }

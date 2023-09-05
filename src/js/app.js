@@ -350,7 +350,7 @@ async function reservarCita() {
       Swal.fire({
         icon: 'success',
         title: 'Cita Creada',
-        text: 'STu Cita fué Creada Correctamente',
+        text: 'Tu Cita fué Creada Correctamente',
         button: 'OK'
       }).then(() => {
         setTimeout(() => {
