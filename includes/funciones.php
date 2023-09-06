@@ -10,14 +10,14 @@ function debuguear($variable): string {
 
 
 //* Escapa / Sanitizar el HTML
-function s($html): string {
+function s($html) : string {
   $s = htmlspecialchars($html);
   return $s;
 }
 
 
 //* comprobar que el Usuario esté Autenticado
-function isAuth(): void {
+function isAuth() : void {
   if(!isset($_SESSION['login'])) {
     header('Location: /');
   }

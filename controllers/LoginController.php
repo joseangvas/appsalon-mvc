@@ -7,7 +7,6 @@ use MVC\Router;
 use Classes\Email;
 
 class LoginController {
-  
   //*****  INICIO DE SESION DE USUARIO  ******//
   public static function login(Router $router) {
     $alertas = [];
@@ -29,7 +28,7 @@ class LoginController {
             $_SESSION['id'] = $usuario->id;
             $_SESSION['nombre'] = $usuario->nombre . " " . $usuario->apellido;
             $_SESSION['email'] = $usuario->email;
-            $SESSION['login'] = true;
+            $_SESSION['login'] = true;
 
             // Redireccionamiento
             if($usuario->admin === "1") {
@@ -55,7 +54,9 @@ class LoginController {
 
   //*****  CERRAR SESION DE USUARIO  ******//
   public static function logout() {
-    echo 'Desde Logout';
+    session_start();
+    $_SESSION = [];
+    header('Location: /');
   }
 
 
@@ -82,9 +83,6 @@ class LoginController {
 
           // Alerta de Exito
           Usuario::setAlerta('exito', 'Revisa tu Email');
-
-
-
         } else {
           Usuario::setAlerta('error', 'El Usuario No Existe o No está Confirmado');
         }
