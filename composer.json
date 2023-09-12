@@ -1,22 +1,22 @@
 {
-    "name": "joseangvas/appsalon",
-    "description": "Proyecto PHP 8 de Peluqueria",
-    "type": "project",
-    "autoload": {
-        "psr-4": {
-            "MVC\\": "./",
-            "Controllers\\": "./controllers",
-            "Model\\": "./models",
-            "Classes\\": "./Classes"
-        }
-    },
-    "authors": [
-        {
-            "name": "joseangvas",
-            "email": "developer.javp@gmail.com"
-        }
-    ],
-    "require": {
-        "phpmailer/phpmailer": "^6.8"
+  "name": "joseangvas/appsalon",
+  "description": "Proyecto PHP 8 de Peluqueria",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "MVC\\": "./",
+      "Controllers\\": "./controllers",
+      "Model\\": "./models",
+      "Classes\\": "./Classes"
     }
+  },
+  "authors": [
+    {
+      "name": "joseangvas",
+      "email": "developer.javp@gmail.com"
+    }
+  ],
+  "require": {
+    "phpmailer/phpmailer": "^6.8"
+  }
 }
