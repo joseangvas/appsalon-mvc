@@ -1,13 +1,7 @@
 {
-    "name": "devel/appsalon-mvc",
-    "description": "Aplicación para Salón de Belleza",
+    "name": "joseangvas/appsalon",
+    "description": "Proyecto PHP 8 de Peluqueria",
     "type": "project",
-    "authors": [
-        {
-            "name": "Joseangvas",
-            "email": "developer.javp@gmail.com"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "MVC\\": "./",
@@ -16,6 +10,12 @@
             "Classes\\": "./Classes"
         }
     },
+    "authors": [
+        {
+            "name": "joseangvas",
+            "email": "developer.javp@gmail.com"
+        }
+    ],
     "require": {
         "phpmailer/phpmailer": "^6.8"
     }
