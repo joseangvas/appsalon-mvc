@@ -115,7 +115,7 @@ class ActiveRecord {
         $resultado = self::consultarSQL($query);
         return array_shift($resultado) ;
     }
-
+    
     //* Obtener Registros con cierta cantidad
     public static function get($limite) {
         $query = "SELECT * FROM " . static::$tabla . " LIMIT $limite";
@@ -130,6 +130,13 @@ class ActiveRecord {
         return array_shift($resultado) ;
     }
     
+
+    //* Consulta Plana de SQL (Utilizar cuando los métodos del Modelo no son Suficientes)
+    public static function SQL($query) {
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
+
 
     //* crea un nuevo registro
     public function crear() {
