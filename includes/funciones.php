@@ -16,6 +16,15 @@ function s($html) : string {
 }
 
 
+//* Comprobar cuando se muestra el Ultimo Servicio de un Cliente
+function esUltimo(string $actual, string $proximo): bool {
+  if($actual !== $proximo) {
+    return true;
+  }
+  return false;
+}
+
+
 //* comprobar que el Usuario esté Autenticado
 function isAuth() : void {
   if(!isset($_SESSION['login'])) {
