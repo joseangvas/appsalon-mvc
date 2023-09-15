@@ -20,6 +20,12 @@
   </form>
 </div>
 
+<?php
+  if(count($citas) === 0) {
+    echo '<h3>No Hay Citas en esta Fecha</h3>';
+  }
+?>
+
 <div class="citas-admin">
   <ul class='citas'>
     <?php
@@ -56,3 +62,7 @@
       }; // Fin de ForEach ?>
   </ul>
 </div>
+
+<?php
+  $script = "<script src='build/js/buscador.js'></script>"
+?>
