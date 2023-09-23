@@ -2,8 +2,8 @@
 
 namespace Controllers;
 
-use Model\Servicio;
 use Model\Cita;
+use Model\Servicio;
 use Model\CitaServicio;
 
 class APIController {
@@ -42,5 +42,4 @@ class APIController {
       header('Location:' . $_SERVER['HTTP_REFERER']);
     }
   }
-
 }

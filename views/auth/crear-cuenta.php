@@ -6,7 +6,6 @@
 ?>
 
 <form action="/crear-cuenta" class="formulario" method="POST">
-
   <div class="campo">
     <label for="nombre">Nombre</label>
     <input 
@@ -62,7 +61,6 @@
   </div>
 
   <input type="submit" value="Crear Cuenta" class="boton"/>
-  
 </form>
 
 <div class="acciones">

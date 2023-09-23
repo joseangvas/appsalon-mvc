@@ -6,7 +6,6 @@
 ?>
 
 <form action="/olvide" class="formulario" method="POST">
-
   <div class="campo">
     <label for="email">Email</label>
     <input 
@@ -18,7 +17,6 @@
   </div>
 
   <input type="submit" class="boton" value="Enviar Instrucciones"/>
-
 </form>
 
 <div class="acciones">
