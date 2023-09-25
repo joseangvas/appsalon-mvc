@@ -7,11 +7,13 @@ use MVC\Router;
 class ServicioController {
   //* Obtener los Datos de los Servicios
   public static function index(Router $router) {
-
     session_start();
 
+    $servicios = Servicio::all();
+
     $router->render('servicios/index', [
-      'nombre' => $_SESSION['nombre']
+      'nombre' => $_SESSION['nombre'],
+      'servicios' => $servicios
     ]);
   }
 
@@ -28,7 +30,6 @@ class ServicioController {
         $servicio->guardar();
         header('Location: /servicios');
       }
-      
     };
     
     $router->render('servicios/crear', [

@@ -24,3 +24,16 @@
     // }
   }
 }
+
+.servicios {
+  @extend .citas; // Para Heredar los Estilos de la Clase citas
+
+  .acciones {
+    margin: 0;
+  }
+
+  .boton,
+  .boton-eliminar {
+    margin: 0;
+  }
+}
