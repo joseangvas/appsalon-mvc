@@ -79,7 +79,18 @@ class ServicioController {
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
       $id = $_POST['id'];
       $servicio = Servicio::find($id);
-      $servicio->eliminar();
+      $servicio->eliminar(); ?>
+      
+      <script>
+        Swal.fire({
+          icon: 'success',
+          title: 'BORRAR SERVICIO',
+          text: 'El Servicio Fué Borrado Correctamente',
+          button: 'OK'
+        })
+      </script>
+      
+      <?php
       header('Location: /servicios');
     };
   }

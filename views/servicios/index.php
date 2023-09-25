@@ -15,9 +15,12 @@
 
         <form action="/servicios/eliminar" method="POST">
           <input type="hidden" name="id" value="<?php echo $servicio->id; ?>">
-          <input type="submit" value="borrar" class="boton-eliminar">
+          <input type="submit" value="Eliminar" class="boton-eliminar">
         </form>
       </div>
     </li>
   <?php } ?>
 </ul>
+
+<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+<script src='build/js/app.js'></script>
