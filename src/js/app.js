@@ -366,3 +366,16 @@ async function reservarCita() {
     })
   }
 }
+
+function mensaje(titulo, mensaje) {
+  Swal.fire({
+    icon: 'success',
+    title: titulo,
+    text: mensaje,
+    button: 'OK'
+  }) .then(() => {
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
+  })
+}
