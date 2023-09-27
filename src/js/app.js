@@ -41,7 +41,7 @@ function mostrarSeccion() {
     seccionAnterior.classList.remove('mostrar');
   }
 
-  // Seleccionar la Sección con el paso...
+  //* Seleccionar la Sección con el paso...
   const pasoSelector = `#paso-${paso}`;
   const seccion = document.querySelector(pasoSelector);
   seccion.classList.add('mostrar');
@@ -114,7 +114,8 @@ function paginaSiguiente() {
 
 async function consultarAPI() {
   try {
-    const url = 'http://localhost:3000/api/servicios';
+    // const url = `${location.origin}/api/servicios`;  --> Cuando corre en un dominio de Hosting y las BD estan en otro Lugar
+    const url = '/api/servicios';
     const resultado = await fetch(url);
     const servicios = await resultado.json();
 
@@ -161,7 +162,7 @@ function seleccionarServicio(servicio) {
   // Identificar el elemento al que se le da Click
   const divServicio = document.querySelector(`[data-id-servicio="${id}"]`);
 
-  // Comprobar si un Servicio fué Agregado o Quitarlo
+  //* Comprobar si un Servicio fué Agregado o Quitarlo
   if(servicios.some(agregado => agregado.id === id)) {
     // Eliminar el Servicio agregado
     cita.servicios = servicios.filter(agregado => agregado.id !== id);
@@ -217,7 +218,7 @@ function seleccionarHora() {
 
 
 function mostrarAlerta(mensaje, tipo, elemento, desaparece = true) {
-  // Previene que se Genere más de una alerta
+  //* Previene que se Genere más de una alerta
   const alertaPrevia = document.querySelector('.alerta');
 
   if(alertaPrevia) {
@@ -234,7 +235,7 @@ function mostrarAlerta(mensaje, tipo, elemento, desaparece = true) {
   referencia.appendChild(alerta);
 
   if(desaparece) {
-    // Calcular Tiempo de 4 Segs. de Muestra de la Alerta
+    //* Calcular Tiempo de 4 Segs. de Muestra de la Alerta
     setTimeout(() => {
       alerta.remove();
     }, 4000);
@@ -245,7 +246,7 @@ function mostrarAlerta(mensaje, tipo, elemento, desaparece = true) {
 function mostrarResumen() {
   const resumen = document.querySelector('.contenido-resumen');
 
-  // Limpiar el Contenido del Resumen
+  //* Limpiar el Contenido del Resumen
   while(resumen.firstChild) {
     resumen.removeChild(resumen.firstChild);
   }
@@ -256,15 +257,15 @@ function mostrarResumen() {
     return;
   }
 
-  // Formatear el DIV de Resumen
+  //* Formatear el DIV de Resumen
   const {nombre, fecha, hora, servicios} = cita;
 
-  // Heading para Resumen de Servicios
+  //* Heading para Resumen de Servicios
   const headingServicios = document.createElement('H3');
   headingServicios.textContent = 'Resumen de Servicios';
   resumen.appendChild(headingServicios);
 
-  // Iterar y Mostrar los Servicios
+  //* Iterar y Mostrar los Servicios
   servicios.forEach(servicio => {
     const {id, precio, nombre} = servicio;
     const contenedorServicio = document.createElement('DIV');
@@ -283,7 +284,7 @@ function mostrarResumen() {
 
   });
 
-  // Heading para Resumen de Cita
+  //* Heading para Resumen de Cita
   const headingCita = document.createElement('H3');
   headingCita.textContent = 'Datos del Cliente';
   resumen.appendChild(headingCita);
@@ -291,7 +292,7 @@ function mostrarResumen() {
   const nombreCliente = document.createElement('P');
   nombreCliente.innerHTML = `<span>Nombre:</span> ${nombre}`
 
-  // Formatear la Fecha en Español
+  //* Formatear la Fecha en Español
   const fechaObj = new Date(fecha);
   const mes = fechaObj.getMonth();
   const dia = fechaObj.getDate() + 2;
@@ -335,8 +336,9 @@ async function reservarCita() {
   datos.append('usuarioId', id);
 
   try {
-    // Petición hacia la API
-    const url = 'http://localhost:3000/api/citas';
+    //* Petición hacia la API
+    // const url = `${location.origin}/api/citas`;   --> Cuando corre en un dominio de Hosting y las BD estan en otro Lugar
+    const url = '/api/citas';
     const respuesta = await fetch(url, {
       method: 'POST',
       body: datos
