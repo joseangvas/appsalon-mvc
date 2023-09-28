@@ -1,0 +1,5 @@
+host: nyc.domcloud.id
+u: peluqueria-eltinte
+p: V3xU+5xQ4nA1ee_(G8
+
+bd: peluqueria-eltinte_db

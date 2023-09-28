@@ -1,0 +1,9 @@
+Si se muestran errores de acceso denegado al intentar importar un archivo de copia de seguridad de MySQL
+a través de phpMyAdmin, lo más probable es que tu consulta MySQL contenga consultas no válidas (prohibidas).
+
+Lo primero al abrir tu archivo MySQL es asegurarte de que no haya ninguna consulta como 'USE DATABASE' o similar.
+También asegurate de que tu archivo MySQL no contenga nombres de bases de datos MySQL/nombres de usuario/contraseñas
+(si un archivo se está importando desde otro host, lo más probable es que el nombre de base de datos o el nombre de
+usuario/contraseña sean diferentes aquí).
+
+ Tu archivo MySQL debe contener consultas estándares como CREATE TABLE e INSERT para que funcione correctamente.
