@@ -118,7 +118,7 @@ class Usuario extends ActiveRecord {
   
   //*****  CREAR UN TOKEN  *****//
   public function crearToken() {
-    $this->token = uniqid();
+    $this->token = uniqid(); // = md5(uniqid()): más avanzado BD + grandes
   }
 
   public function comprobarPasswordAndVerificado($password) {
